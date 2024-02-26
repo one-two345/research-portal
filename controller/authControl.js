@@ -2,7 +2,7 @@
 import UserModel from '../models/users.js';
 import ProjectModel from "../models/projects.js";
 import jwt from 'jsonwebtoken'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import path from 'path';
 import multer from 'multer'
 import { fileURLToPath } from 'url';
@@ -44,6 +44,36 @@ const register = async (req, res) => {
       }
 
       const hash = await bcrypt.hash(password, 12);
+
+
+
+      // Function to hash a password
+      // function hashPassword(plaintextPassword, callback) {
+      //   bcrypt.genSalt(10, (err, salt) => {
+      //     if (err) return callback(err);
+
+      //     bcrypt.hash(plaintextPassword, salt, (err, hash) => {
+      //       if (err) return callback(err);
+
+      //       // Call the callback with the hashed password
+      //       callback(null, hash);
+      //     });
+      //   });
+      // }
+
+      
+
+      // // Hash the password and store it within a specific scope
+      // const hash = hashPassword(password, (err, hashedPassword) => {
+      //   if (err) throw err;
+
+      //   // Use the hashed password within this scope
+      //   return hashedPassword;
+
+      //   // You can pass the hashed password to other functions or store it in a database
+      // });
+
+
       const nowDate = new Date(Date.now()).toISOString();
       // await UserModel.updateMany( {},{ $set: { sex : 'Male'} }, { multi: true });
       // await UserModel.updateMany( {},{ $set: { registeredDate : nowDate} }, { multi: true });

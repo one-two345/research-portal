@@ -1,5 +1,5 @@
 import express from 'express'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import  jwt  from 'jsonwebtoken'
 import UserModel from '../models/users.js'
 
@@ -13,7 +13,9 @@ router.post('/login',(req,res)=>{
       .then((user) => {
         if (!user) {
           return res.status(404).json({ error: 'User not found' });
-        }
+        }   
+
+
   
         bcrypt.compare(password, user.password, (error, response) => {
           if (response) {
