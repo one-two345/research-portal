@@ -65,7 +65,7 @@ async function main() {
 }
 main()
 
-    app.use('/check-auth-status', ProtectAdmin);
+app.get('/check-auth-status', ProtectAdmin);
 //user routes
 app.get('/logout', (req, res) => {
   res.clearCookie('token').send('Logged out successfully.');

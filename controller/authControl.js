@@ -9,8 +9,8 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import { v4 as uuidv4 } from "uuid";
 
-//const SECRET_KEY=process.env.SECRET_KEY
-const SECRET_KEY='miint'
+const SECRET_KEY=process.env.SECRET_KEY
+
 const verifyToken = async (req, res, next) => {
 
   const token = req.cookies.token;
