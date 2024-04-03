@@ -223,7 +223,7 @@
 import UserModel from '../models/users.js';
 import ProjectModel from "../models/projects.js";
 import jwt from 'jsonwebtoken'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import path from 'path';
 import multer from 'multer'
 import { fileURLToPath } from 'url';
