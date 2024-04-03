@@ -42,7 +42,7 @@ import adminUserStatus from './routes/admin/adminUserStatus.js';
 
 const app = express();
 const CONNECTION_URL = process.env.CONNECTION_URL
- const PORT = process.env.PORT_2;
+ const PORT = process.env.PORT;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
