@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser'
 
 import path from 'path';
-dotenv.config();
+
 
 import register from './controller/authControl.js'
 import announcementPost from './controller/announcementPost.js';
@@ -39,6 +39,7 @@ import admin2Reports from './routes/admin2Reports.js'
 import adminAppointment from './routes/admin/adminAppointment.js';
 import adminUserStatus from './routes/admin/adminUserStatus.js';
 
+
 const app = express();
 const CONNECTION_URL = process.env.CONNECTION_URL
  const PORT = process.env.PORT_2;
@@ -46,12 +47,10 @@ const CONNECTION_URL = process.env.CONNECTION_URL
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser())
-app.use(cors({
-  origin: "http://localhost:3000",
-  methods: ['GET', 'POST',"PUT"],
-  credentials: true
-}));
+app.use(cors({ credentials: true,
+  origin: 'https://mint2024.netlify.app',}));
 app.use(express.static(path.join('./', 'public')));
+dotenv.config();
 
 
 // db connection

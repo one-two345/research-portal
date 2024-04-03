@@ -1,8 +1,10 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv'
 
 const ProtectAdmin = express.Router();
-const SECRET_KEY = 'miint';
+dotenv.config()
+const SECRET_KEY = process.env.SECRET_KEY;
 
 const verifyToken = async (req, res, next) => {
   const token = req.cookies.token;
