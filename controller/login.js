@@ -103,7 +103,7 @@ login.post('/login',(req,res)=>{
               { expiresIn: '1d' }
          );
             res.cookie('token', token, { httpOnly: true }); 
-            return res.json({ message: 'ok', token,role:user.role });
+            return res.json({ message: 'ok', token,role:user.role, name: `${user.fName } ${user.LName}` });
           } else {
             return res.json({ error: 'Incorrect password' });//status(401).
           }
