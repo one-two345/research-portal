@@ -32,7 +32,7 @@ function Verify(req, res, next) {
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const newNewsId = 'image-' + Date.now();
-    const newsImagesPath = public/news_images/${newNewsId};
+    const newsImagesPath = `public/news_images/${newNewsId}`;
     const galleryPath = path.join(newsImagesPath, 'gallery');
     const thumbsPath = path.join(galleryPath, 'thumbs');
 
