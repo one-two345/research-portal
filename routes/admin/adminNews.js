@@ -71,7 +71,7 @@ router.post('/add-news', (req, res) => {
       //   Remove 'public' from the path
       const parts = imagePath.split('public\\');
       const cleanImagePath = imagePath.replace(/\\/g, '/').split('public/').pop();
-      const imageUrl = serverUrl + '/' + cleanImagePath;  
+      const imagePaths = serverUrl + '/' + cleanImagePath;  
       // const cleanImagePath = parts.join('');
       // const imageUrl = serverUrl + '/' + cleanImagePath;      
       // const imagePaths = imageUrl.replace(/\//g, '\\')
@@ -84,7 +84,7 @@ router.post('/add-news', (req, res) => {
         content:content,
         category:category,
         date:date,
-        imagePath: imageUrl
+        imagePath: imagePaths
       })
       .then((result)=>{console.log(result); res.json(result)})
       .catch(err=>console.log(err))
