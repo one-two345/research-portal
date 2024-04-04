@@ -66,7 +66,7 @@ router.post('/add-news', (req, res) => {
       let imagePath = 'public\\images\\noimage.png'
       if (req.file){ imagePath = req.file.path; 
       console.log(imagePath)  }
-      const serverUrl = 'https://final-0t4v.onrender.com'; // Replace this with your server URL
+      const serverUrl = 'https://research-portal-server-9.onrender.com/'; // Replace this with your server URL
       
       //   Remove 'public' from the path
       const parts = imagePath.split('public\\');
