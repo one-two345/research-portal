@@ -236,14 +236,14 @@ const verifyToken = async (req, res, next) => {
 
   const token = req.cookies.token;
   //console.log(token)
-  if (!token) {
-    return res.status(401).json({ message: 'Unauthorized' });
-  }
+  // if (!token) {
+  //   return res.status(401).json({ message: 'Unauthorized' });
+  // }
 
-  try {
-    const decoded =await jwt.verify(token, SECRET_KEY);
-    req.user = await decoded.user;
-      console.log(req.user)
+   try {
+  //   const decoded =await jwt.verify(token, SECRET_KEY);
+  //   req.user = await decoded.user;
+  //     console.log(req.user)
 
     next();
   } catch (error) {
