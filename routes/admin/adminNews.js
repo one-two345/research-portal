@@ -56,7 +56,7 @@ const upload = multer({
 
 
 // POST add-news
-router.post('/add-news',Verify, (req, res) => {
+router.post('/add-news', (req, res) => {
   upload(req, res, async (err) => {
     if (err) {
       // Handle upload error
