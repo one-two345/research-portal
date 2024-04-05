@@ -16,6 +16,7 @@ import announcementPost from './controller/announcementPost.js';
 import news from './routes/news.js'
 import Collaboration from './routes/collaboration.js';
 import resources from './routes/resources.js'
+import histroyRoute from './routes/historyForHome.js';
 import adminAppointments from './routes/admin/adminAppointments.js'
 import adminPublications from './routes/admin/adminPublications.js'
 import adminAcceptedProjects from './routes/admin/adminAcceptedProjects.js'
@@ -80,6 +81,7 @@ app.use('/admind3',dashboardRoute3)
 app.use('/news', news);
 //app.use('/auth',ProtectAdmin)
 app.use('/resources', resources);
+app.use('/history',histroyRoute)
 app.use('/institutes', institutes);
 app.use('/report', report);
 
