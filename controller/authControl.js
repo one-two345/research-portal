@@ -345,11 +345,11 @@ else if (req.params.page === "submitProject") {
 
   try {
     verifyToken(req, res, async () => {
-      const User = await req.user;
-    console.log(User);
-      if (!User) {
-        return res.json({ message: 'User not found. Please register or log in.' });
-      }
+    //   const User = await req.user;
+    // console.log(User);
+    //   if (!User) {
+    //     return res.json({ message: 'User not found. Please register or log in.' });
+    //   }
       upload.fields([
         { name: 'cvFile', maxCount: 1 },
         { name: 'proposalFile', maxCount: 2 },
