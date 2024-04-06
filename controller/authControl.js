@@ -338,6 +338,7 @@ else if (req.params.page === "submitProject") {
     },
     filename: (req, file, cb) => {
       cb(null, Date.now() + path.extname(file.originalname));
+      console.log(file.originalname);
     }
   });
 
