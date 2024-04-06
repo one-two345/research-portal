@@ -329,41 +329,104 @@ const register = async (req, res) => {
   }
 
 else if (req.params.page === "submitProject") {
-  const __filename = fileURLToPath(import.meta.url);
-  // const __dirname = dirname(__filename);
-  const __dirname = "public";
+  // const __filename = fileURLToPath(import.meta.url);
+  // // const __dirname = dirname(__filename);
+  // const __dirname = "public";
+  // const storage = multer.diskStorage({
+  //   destination: (req, file, cb) => {
+  //     cb(null, path.join(__dirname, 'uploads'));
+  //   },
+  //   filename: (req, file, cb) => {
+  //     cb(null, Date.now() + path.extname(file.originalname));
+  //   }
+  // });
+
+  // const upload = multer({ storage });
   const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-      cb(null, path.join(__dirname, 'uploads'));
+
+      const publicationsPath = 'public/uploads'
+  
+      fs.mkdir(publicationsPath, { recursive: true }, (err) => {
+        if (err) {
+          console.error('Error creating directory:', err);
+        } else {
+          console.log('Directory created successfully:', publicationsPath);
+          cb(null, publicationsPath);
+        }
+      });
     },
     filename: (req, file, cb) => {
-      cb(null, Date.now() + path.extname(file.originalname));
-    }
+      cb(null, file.originalname);
+    },
   });
-
-  const upload = multer({ storage });
+  
+  const upload = multer({
+    storage: storage,
+    limits: { fileSize: 3000000 }, // File size limit: 3MB
+  }).fields([
+    { name: 'cvFile', maxCount: 1 },
+    { name: 'proposalFile', maxCount: 2 },
+    { name: 'letter', maxCount: 2 }
+  ]);
 
   try {
-    verifyToken(req, res, async () => {
-    //   const User = await req.user;
-    // console.log(User);
-    //   if (!User) {
-    //     return res.json({ message: 'User not found. Please register or log in.' });
-    //   }
-      upload.fields([
-        { name: 'cvFile', maxCount: 1 },
-        { name: 'proposalFile', maxCount: 2 },
-        { name: 'letter', maxCount: 2 }
-      ])(req, res, async (err) => {
-        if (err) {
-          console.log('Error occurred during file upload: ' + err);
-          return res.json({ message: 'Error occurred during file upload' });
-        }
+    // verifyToken(req, res, async () => {
+    // //   const User = await req.user;
+    // // console.log(User);
+    // //   if (!User) {
+    // //     return res.json({ message: 'User not found. Please register or log in.' });
+    // //   }
+    //   upload.fields([
+    //     { name: 'cvFile', maxCount: 1 },
+    //     { name: 'proposalFile', maxCount: 2 },
+    //     { name: 'letter', maxCount: 2 }
+    //   ])(req, res, async (err) => {
+    //     if (err) {
+    //       console.log('Error occurred during file upload: ' + err);
+    //       return res.json({ message: 'Error occurred during file upload' });
+    //     }  
 
+    upload(req, res, async (err) => {
+      if (err) {
+        res.status(500).json({ error: 'An error occurred while uploading' });
+      } else {
+       
+        let cvFilePath = '';
+        let proposalFilePath = '';
+        let letterFilePath = '';
+     
+  
+        if(req.files['cvFile']) {
+          cvFilePath = req.files['file'][0].path; // Multer saves the file path
+         console.log(filePath)
+         }
+         if(req.files['proposalFile']) {
+          proposalFilePath = req.files['proposalFile'][0].path; // Multer saves the file path
+         console.log(filePath)
+         }
+         if(req.files['letter']) {
+          letterFilePath = req.files['letter'][0].path; // Multer saves the file path
+         console.log(filePath)
+         }
+                     
+       
+  
+  
+        const serverUrl = 'https://research-portal-server-9.onrender.com'; // Replace this with your server URL
+  
+ 
+  
+        // Process file path
+        const cleanFilePathCv = cvFilePath.replace(/\\/g, '/').split('public/').pop();
+        const filePathsCv = serverUrl + '/' + cleanFilePathCv;
 
+        const cleanFilePathProposal = proposalFilePath.replace(/\\/g, '/').split('public/').pop();
+        const filePathsProposal = serverUrl + '/' + cleanFilePathProposal;
 
-        
-        //console.log(req.body);
+        const cleanFilePathLetter = letterFilePath.replace(/\\/g, '/').split('public/').pop();
+        const filePathsLetter = serverUrl + '/' + cleanFilePathLetter;
+
         let Title = [];
 
         const projectTitle = req.body.projectTitle;
@@ -374,10 +437,11 @@ else if (req.params.page === "submitProject") {
         const institute = req.body.institute;
         console.log('Project Title:', projectTitle);
         console.log("TeamMember: " + teamMembers);
+        console.log(req.files['cvFile'][0].path)
 
-        const cvPath = req.files['cvFile'][0].path.split('\\')[1] + '\\' + req.files['cvFile'][0].path.split('\\')[2];
-        const proposalPath = req.files['proposalFile'][0].path.split('\\')[1] + "\\" +req.files['proposalFile'][0].path.split('\\')[2];
-        const letterPath = req.files['letter'][0].path.split('\\')[1] + "\\" +req.files['letter'][0].path.split('\\')[2];
+        // const cvPath = req.files['cvFile'][0].path.split('\\')[1] + '\\' + req.files['cvFile'][0].path.split('\\')[2];
+        // const proposalPath = req.files['proposalFile'][0].path.split('\\')[1] + "\\" +req.files['proposalFile'][0].path.split('\\')[2];
+        // const letterPath = req.files['letter'][0].path.split('\\')[1] + "\\" +req.files['letter'][0].path.split('\\')[2];
 
         let team1 = teamMembers.replace('[', '');
         team1 = team1.replace(']', '');
@@ -409,12 +473,12 @@ else if (req.params.page === "submitProject") {
             teamMembers:teamMembers1,
             projectCategory:projectCategory,
             description:description,
-            cvPath:cvPath,
-            proposalPath:proposalPath,
+            cvPath:filePathsCv,
+            proposalPath:filePathsProposal,
             email:email1,
             status:1,
             hostInstitution:institute,
-            letterPath: letterPath,
+            letterPath: filePathsLetter,
             submittedDate: nowDate,
             grantedDate: nowDate,
             proposalPath2: " ",
@@ -425,9 +489,16 @@ else if (req.params.page === "submitProject") {
           .catch(error=>{res.json('error during created projects'+error)})
         }
         
-       
-      });
+
+      }
     });
+        
+        //console.log(req.body);
+       
+        
+       
+    //   });
+    // });
   } catch (error) { 
     return res.json({ message: 'Error occurred during project idea submission: ' + error });
   }
