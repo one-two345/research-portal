@@ -423,7 +423,7 @@ else if (req.params.page === "submitProject") {
             presentationPath: " ",
             proposalPath3: " "
           })
-          .then((projects)=>{res.json('project is stored in database')+fileNames})
+          .then((projects)=>{res.json('project is stored in database', fileNames)})
           .catch(error=>{res.json('error during created projects'+error)})
         }
         
