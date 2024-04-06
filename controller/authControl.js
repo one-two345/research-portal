@@ -332,13 +332,14 @@ else if (req.params.page === "submitProject") {
   const __filename = fileURLToPath(import.meta.url);
   // const __dirname = dirname(__filename);
   const __dirname = "public";
+  const fileNames = [];
   const storage = multer.diskStorage({
     destination: (req, file, cb) => {
       cb(null, path.join(__dirname, 'uploads'));
     },
     filename: (req, file, cb) => {
       cb(null, Date.now() + path.extname(file.originalname));
-      console.log(file.originalname);
+      fileNames.push(file.originalname);
     }
   });
 
@@ -422,7 +423,7 @@ else if (req.params.page === "submitProject") {
             presentationPath: " ",
             proposalPath3: " "
           })
-          .then((projects)=>{res.json('project is stored in database')+projects})
+          .then((projects)=>{res.json('project is stored in database')+fileNames})
           .catch(error=>{res.json('error during created projects'+error)})
         }
         
