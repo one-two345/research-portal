@@ -822,8 +822,7 @@ else if (req.params.page === "submitProject") {
         const proposalPath = req.body.proposalFile;        
         const letterPath = req.body.letter;
 
-        if (cvPath){
-            console.log(cvPath)
+       
         
        
         console.log('Project Title:', projectTitle);
@@ -868,27 +867,31 @@ else if (req.params.page === "submitProject") {
         if(Title.length>0){
           res.json('titlepresent')
 
-        }else{
-          const projects=   await   ProjectModel.create({
-            projectTitle:projectTitle,
-            teamMembers:teamMembers1,
-            projectCategory:projectCategory,
-            description:description,
-            cvPath:cvPath,
-            proposalPath:proposalPath,
-            email:email1,
-            status:1,
-            hostInstitution:institute,
-            letterPath: letterPath,
-            submittedDate: nowDate,
-            grantedDate: nowDate,
-            proposalPath2: " ",
-            presentationPath: " ",
-            proposalPath3: " "
-          })
-          .then((projects)=>{res.json('project is stored in database')+projects})
-          .catch(error=>{res.json('error during created projects'+error)})
-        }
+        }else {
+          try {
+            const project = await ProjectModel.create({
+              projectTitle: projectTitle,
+              teamMembers: teamMembers1,
+              projectCategory: projectCategory,
+              description: description,
+              cvPath: cvPath,
+              proposalPath: proposalPath,
+              email: email1,
+              status: 1,
+              hostInstitution: institute,
+              letterPath: letterPath,
+              submittedDate: nowDate,
+              grantedDate: nowDate,
+              proposalPath2: " ",
+              presentationPath: " ",
+              proposalPath3: " "
+            });
+        
+            res.json('Project is stored in the database: ' + project);
+          } catch (error) {
+            res.json('Error during creating project: ' + error);
+          }
+               
         
       }
     //   });
