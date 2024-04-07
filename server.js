@@ -48,10 +48,11 @@ const CONNECTION_URL = process.env.CONNECTION_URL
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser())
-app.use(cors({ credentials: true,
-  origin: 'https://mint2024.netlify.app',}));
-app.use(express.static(path.join('./', 'public')));
-dotenv.config();
+app.use(cors())
+// app.use(cors({ credentials: true,
+//   origin: 'https://mint2024.netlify.app',}));
+// app.use(express.static(path.join('./', 'public')));
+// dotenv.config();
 
 
 // db connection
