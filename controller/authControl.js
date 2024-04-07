@@ -685,15 +685,15 @@ dotenv.config()
 const SECRET_KEY= process.env.SECRET_KEY
 const verifyToken = async (req, res, next) => {
 
-  const token = req.cookies.token;
-  //console.log(token)
-  if (!token) {
-    return res.status(401).json({ message: 'Unauthorized' });
-  }
+  // const token = req.cookies.token;
+  // //console.log(token)
+  // if (!token) {
+  //   return res.status(401).json({ message: 'Unauthorized' });
+  // }
 
   try {
-    const decoded =await jwt.verify(token, SECRET_KEY);
-    req.user = await decoded.user;
+    // const decoded =await jwt.verify(token, SECRET_KEY);
+    // req.user = await decoded.user;
       console.log(req.user)
 
     next();
