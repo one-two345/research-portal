@@ -774,20 +774,20 @@ const register = async (req, res) => {
   }
 
 else if (req.params.page === "submitProject") {
-  const __filename = fileURLToPath(import.meta.url);
+  // const __filename = fileURLToPath(import.meta.url);
 
-  // const __dirname = dirname(__filename);
-  const __dirname = "public";
-  const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, path.join(__dirname, 'uploads'));
-    },
-    filename: (req, file, cb) => {
-      cb(null, Date.now() + path.extname(file.originalname));
-    }
-  });
+  // // const __dirname = dirname(__filename);
+  // const __dirname = "public";
+  // const storage = multer.diskStorage({
+  //   destination: (req, file, cb) => {
+  //     cb(null, path.join(__dirname, 'uploads'));
+  //   },
+  //   filename: (req, file, cb) => {
+  //     cb(null, Date.now() + path.extname(file.originalname));
+  //   }
+  // });
 
-  const upload = multer({ storage });
+  // const upload = multer({ storage });
 
   try {
     verifyToken(req, res, async () => {
@@ -796,15 +796,15 @@ else if (req.params.page === "submitProject") {
     //   if (!User) {
     //     return res.json({ message: 'User not found. Please register or log in.' });
     //   }
-      upload.fields([
-        { name: 'cvFile', maxCount: 1 },
-        { name: 'proposalFile', maxCount: 2 },
-        { name: 'letter', maxCount: 2 }
-      ])(req, res, async (err) => {
-        if (err) {
-          console.log('Error occurred during file upload: ' + err);
-          return res.json({ message: 'Error occurred during file upload' });
-        }
+      // upload.fields([
+      //   { name: 'cvFile', maxCount: 1 },
+      //   { name: 'proposalFile', maxCount: 2 },
+      //   { name: 'letter', maxCount: 2 }
+      // ])(req, res, async (err) => {
+      //   if (err) {
+      //     console.log('Error occurred during file upload: ' + err);
+      //     return res.json({ message: 'Error occurred during file upload' });
+      //   }
 
 
 
@@ -819,6 +819,7 @@ else if (req.params.page === "submitProject") {
         const email1 = req.body.email;
         const institute = req.body.institute;
         const cvPath = req.body.cvFile;
+        
         const proposalPath = req.body.proposalFile;        
         const letterPath = req.body.letter;
         console.log('Project Title:', projectTitle);
@@ -864,7 +865,7 @@ else if (req.params.page === "submitProject") {
           res.json('titlepresent')
 
         }else{
-          const projects=   await   ProjectModel.create({
+          const projects=   await   ProjectModel.save({
             projectTitle:projectTitle,
             teamMembers:teamMembers1,
             projectCategory:projectCategory,
@@ -887,7 +888,7 @@ else if (req.params.page === "submitProject") {
         
        
       });
-    });
+    // });
   } catch (error) { 
     return res.json({ message: 'Error occurred during project idea submission: ' + error });
   }
