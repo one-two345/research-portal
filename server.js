@@ -52,7 +52,9 @@ const corsOptions = {
   origin: 'https://mint2024.netlify.app',
   credentials: true // Allow credentials
 };
+
 app.use(cors(corsOptions)); // Enable preflight requests for all routes
+app.options('*', cors(corsOptions)); // Enable preflight requests for all routes
 
 app.use(express.static(path.join('./', 'public')));
 dotenv.config();
