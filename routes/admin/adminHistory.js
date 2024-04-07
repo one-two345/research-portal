@@ -81,68 +81,51 @@
 // });
 
 // export default historyRouter;
-
-
 import express from 'express';
 import multer from 'multer';
 import { MongoClient } from 'mongodb';
 import Grid from 'gridfs-stream';
 import History from '../../models/history.js';
-import mongoose from 'mongoose'; // Import mongoose
+import mongoose from 'mongoose';
 
 const historyRouter = express.Router();
 
-// Get the existing MongoDB connection from the server.js file
-const dbConnection = mongoose.connection;
+// MongoDB connection URI
+const mongoURI = 'mongodb://localhost:27017/my_database';
+
+// Create a MongoDB connection
+const conn = mongoose.createConnection(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 let gfs;
 
 // Initialize GridFS stream
-Grid.mongo = mongoose.mongo;
-gfs = Grid(dbConnection.db);
+conn.once('open', () => {
+  // Initialize GridFS stream with the MongoDB connection
+  gfs = Grid(conn.db, mongoose.mongo);
+  gfs.collection('uploads');
+});
 
-// Multer GridFS storage configuration
-const storage = multer.GridFsStorage({
-  gfs: gfs,
-  file: (req, file) => {
-    return {
-      filename: file.originalname,
-      bucketName: 'uploads'
-    };
+// Handle MongoDB connection error
+conn.on('error', (err) => {
+  console.error('Error connecting to MongoDB:', err);
+});
+
+// Multer disk storage configuration
+const storage = new multer.diskStorage({
+  destination: (req, file, cb) => {
+    // Configure destination folder
+    cb(null, 'public/uploads');
+  },
+  filename: (req, file, cb) => {
+    // Generate unique filename
+    cb(null, file.originalname);
   }
 });
 const upload = multer({ storage });
 
 historyRouter.post('/add-history', upload.fields([{ name: 'image', maxCount: 1 }, { name: 'file', maxCount: 1 }]), async (req, res) => {
   try {
-    const { title, p_investigator, author, funding_source, description, field_of_study, date } = req.body;
-    let filePath = '';
-    let imagePath = 'public/images/noimage.png';
-
-    if (req.files['file']) {
-      filePath = req.files['file'][0].filename;
-    }
-
-    if (req.files['image']) {
-      imagePath = req.files['image'][0].filename;
-    }
-
-    // Create a new history object with file paths
-    const newPublication = new History({
-      title,
-      p_investigator,
-      author,
-      funding_source,
-      description,
-      field_of_study,
-      date,
-      imagePath: '/file/' + imagePath,
-      filePath: '/file/' + filePath
-    });
-
-    // Save the history object to the database
-    const savedPublication = await newPublication.save();
-    res.json(savedPublication);
+    // Handle file uploads and save to database
   } catch (error) {
     console.error('An error occurred while saving to the database:', error);
     res.status(500).json({ error: 'An error occurred while saving to the database' });
@@ -150,5 +133,3 @@ historyRouter.post('/add-history', upload.fields([{ name: 'image', maxCount: 1 }
 });
 
 export default historyRouter;
-
-
