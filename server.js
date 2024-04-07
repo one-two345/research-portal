@@ -5,7 +5,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors'
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser'
-
+import historyRouter from './routes/admin/adminHistory.js';
 import path from 'path';
 
 
@@ -100,6 +100,7 @@ app.use('/report', report);
 //middleware to  admin  routes
 app.use('/admin/appointments', adminAppointments);
 app.use('/admin/news', adminNews);
+app.use('/admin',historyRouter)
 app.use('/admin/publications', adminPublications)
 app.use('/admin/accepted-projects', adminAcceptedProjects)
 app.use('/admin/institutes', adminInstitutes)
