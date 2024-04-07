@@ -819,9 +819,13 @@ else if (req.params.page === "submitProject") {
         const email1 = req.body.email;
         const institute = req.body.institute;
         const cvPath = req.body.cvFile;
-        
         const proposalPath = req.body.proposalFile;        
         const letterPath = req.body.letter;
+
+        if (cvPath){
+            console.log(cvPath)
+        
+       
         console.log('Project Title:', projectTitle);
         console.log("TeamMember: " + teamMembers);
 
@@ -886,13 +890,14 @@ else if (req.params.page === "submitProject") {
           .catch(error=>{res.json('error during created projects'+error)})
         }
         
-       
+      }
     //   });
     // });
   } catch (error) { 
     return res.json({ message: 'Error occurred during project idea submission: ' + error });
   }
 }
+
 
 
 
