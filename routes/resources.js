@@ -31,23 +31,10 @@ router.get('/accepted-projects', async (req, res) => {
 });
 router.get('/history', async (req, res) => {
   try {
-    const acceptedProjectData = await History.find(); // Fetch all history from the MongoDB collection
-
-    // Convert fileString and imageString from base64 to binary data
-    const updatedData = acceptedProjectData.map(item => {
-      const updatedItem = { ...item.toObject() }; // Convert Mongoose document to plain JavaScript object
-      if (updatedItem.fileString) {
-        updatedItem.fileData = Buffer.from(updatedItem.fileString, 'base64').toString('base64');
-      }
-      if (updatedItem.imageString) {
-        updatedItem.imageData = Buffer.from(updatedItem.imageString, 'base64').toString('base64');
-      }
-      return updatedItem;
-    });
-
-    res.json(updatedData);
+    const acceptedProjectData = await History.find(); // Fetch all news from the MongoDB collection
+    res.json(acceptedProjectData);
   } catch (error) {
-    console.error('Error:', error);
+    console.error('error2:', error)
     res.status(500).json({ error: 'Server error' });
   }
 });
