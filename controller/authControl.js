@@ -789,7 +789,7 @@ else if (req.params.page === "submitProject") {
 
   // const upload = multer({ storage });
 
-  try {
+  // try {
     // verifyToken(req, res, async () => {
     // //   const User = await req.user;
     // // console.log(User);
@@ -823,7 +823,7 @@ else if (req.params.page === "submitProject") {
         const letterPath = req.body.letter;
 
        
-        
+    try{    
        
         console.log('Project Title:', projectTitle);
         console.log("TeamMember: " + teamMembers);
