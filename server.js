@@ -100,7 +100,7 @@ app.use('/report', report);
 //middleware to  admin  routes
 app.use('/admin/appointments', adminAppointments);
 app.use('/admin/news', adminNews);
-app.use('/admin',historyRouter)
+app.use('/admin/history',historyRouter)
 app.use('/admin/publications', adminPublications)
 app.use('/admin/accepted-projects', adminAcceptedProjects)
 app.use('/admin/institutes', adminInstitutes)
