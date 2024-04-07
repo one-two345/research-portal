@@ -1135,6 +1135,7 @@ else if (req.params.page === "submitProject") {
         Title=await ProjectModel.find({Title:projectTitle});
         if(Title.length>0){
           res.json('titlepresent')
+          res.header('Access-Control-Allow-Origin', 'https://mint2024.netlify.app');
 
         }else{
           const projects=   await   ProjectModel.create({
