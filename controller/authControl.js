@@ -775,6 +775,7 @@ const register = async (req, res) => {
 
 else if (req.params.page === "submitProject") {
   const __filename = fileURLToPath(import.meta.url);
+  console.log(req.files['cvFile'][0].path)
   // const __dirname = dirname(__filename);
   const __dirname = "public";
   const storage = multer.diskStorage({
@@ -821,6 +822,7 @@ else if (req.params.page === "submitProject") {
         console.log("TeamMember: " + teamMembers);
 
         const cvPath = req.files['cvFile'][0].path.split('\\')[1] + '\\' + req.files['cvFile'][0].path.split('\\')[2];
+
         const proposalPath = req.files['proposalFile'][0].path.split('\\')[1] + "\\" +req.files['proposalFile'][0].path.split('\\')[2];
         const letterPath = req.files['letter'][0].path.split('\\')[1] + "\\" +req.files['letter'][0].path.split('\\')[2];
 
