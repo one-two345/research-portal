@@ -50,7 +50,7 @@ app.use(express.json());
 app.use(cookieParser())
 const corsOptions = {
   origin: 'https://mint2024.netlify.app',
-  credentials: true // Allow credentials
+  credentials: false // Allow credentials
 };
 
 app.use(cors(corsOptions)); // Enable preflight requests for all routes
