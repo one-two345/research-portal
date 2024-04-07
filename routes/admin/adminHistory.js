@@ -91,7 +91,7 @@ import mongoose from 'mongoose';
 const historyRouter = express.Router();
 
 // MongoDB connection URI
-const mongoURI = 'mongodb://localhost:27017/my_database';
+const mongoURI ='mongodb+srv://yingesdamte:yingesdamte@cluster0.9qj7xxi.mongodb.net/Mint?retryWrites=true&w=majority'
 
 // Create a MongoDB connection
 const conn = mongoose.createConnection(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
