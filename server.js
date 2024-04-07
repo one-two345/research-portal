@@ -48,9 +48,11 @@ const CONNECTION_URL = process.env.CONNECTION_URL
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser())
-app.use(cors({ credentials: true,
-  origin: 'https://mint2024.netlify.app',}));
-app.options('*', cors(corsOptions)); // Enable preflight requests for all routes
+const corsOptions = {
+  origin: 'https://mint2024.netlify.app',
+  credentials: true // Allow credentials
+};
+app.use(cors(corsOptions)); // Enable preflight requests for all routes
 
 app.use(express.static(path.join('./', 'public')));
 dotenv.config();
