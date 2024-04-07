@@ -892,6 +892,7 @@
 import UserModel from '../models/users.js';
 import ProjectModel from "../models/projects.js";
 import jwt from 'jsonwebtoken'
+import fs from 'fs';
 import bcrypt from 'bcryptjs'
 import path from 'path';
 import multer from 'multer'
@@ -1068,15 +1069,15 @@ else if (req.params.page === "submitProject") {
   
         if(req.files['cvFile']) {
           cvFilePath = req.files['file'][0].path; // Multer saves the file path
-         console.log(filePath)
+         console.log(cvFilePath)
          }
          if(req.files['proposalFile']) {
           proposalFilePath = req.files['proposalFile'][0].path; // Multer saves the file path
-         console.log(filePath)
+         console.log(proposalFilePath)
          }
          if(req.files['letter']) {
           letterFilePath = req.files['letter'][0].path; // Multer saves the file path
-         console.log(filePath)
+         console.log(letterFilePath)
          }
                      
        
