@@ -29,7 +29,7 @@ const upload = multer({
   { name: 'file', maxCount: 1 },
 ]);
 
-router.post('/add-history', (req, res) => {
+historyRouter.post('/add-history', (req, res) => {
   upload(req, res, async (err) => {
     if (err) {
       res.status(500).json({ error: 'An error occurred while uploading' });
