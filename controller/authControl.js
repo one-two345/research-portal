@@ -796,7 +796,6 @@ else if (req.params.page === "submitProject") {
     //   if (!User) {
     //     return res.json({ message: 'User not found. Please register or log in.' });
     //   }
-    console.log(req.files['cvFile'][0].path)
       upload.fields([
         { name: 'cvFile', maxCount: 1 },
         { name: 'proposalFile', maxCount: 2 },
