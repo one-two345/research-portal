@@ -835,6 +835,7 @@ else if (req.params.page === "submitProject") {
           teamMembers1.push(team1.split(',')[i]);
         }
         console.log("TeamMember1: " + teamMembers1);
+        console.log("CV: " + req.files['cvFile'][0].path)
         const nowDate = new Date(Date.now()).toISOString();
         // console.log(cvPath);
         // console.log(proposalPath);
