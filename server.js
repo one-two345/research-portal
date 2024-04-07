@@ -49,12 +49,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser())
 
-const corsOptions ={
-    origin:'https://mint2024.netlify.app', 
-    credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200
-}
-app.use(cors(corsOptions));
+// const corsOptions ={
+//     origin:'https://mint2024.netlify.app', 
+//     credentials:true,            //access-control-allow-credentials:true
+//     optionSuccessStatus:200
+// }
+app.use(cors({
+  origin:'https://mint2024.netlify.app', 
+  credentials:true,            //access-control-allow-credentials:true
+  //MmmoptionSuccessStatus:200
+}));
 app.use(express.static(path.join('./', 'public')));
 dotenv.config();
 
