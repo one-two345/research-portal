@@ -822,7 +822,7 @@ else if (req.params.page === "submitProject") {
         console.log("TeamMember: " + teamMembers);
 
         const cvPath = req.files['cvFile'][0].path.split('\\')[1] + '\\' + req.files['cvFile'][0].path.split('\\')[2];
-
+        console.log(req.files['cvFile'][0].path)
         const proposalPath = req.files['proposalFile'][0].path.split('\\')[1] + "\\" +req.files['proposalFile'][0].path.split('\\')[2];
         const letterPath = req.files['letter'][0].path.split('\\')[1] + "\\" +req.files['letter'][0].path.split('\\')[2];
 
