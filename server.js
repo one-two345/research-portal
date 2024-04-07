@@ -74,6 +74,8 @@ async function main() {
 }
 main()
 
+
+
     app.use('/check-auth-status', ProtectAdmin);
 //user routes
 app.get('/logout', (req, res) => {
