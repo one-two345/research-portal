@@ -66,13 +66,14 @@ dotenv.config();
 // db connection
 async function main() {
   try {
-    await mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true });
+  await mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true });
     console.log('Connected to MongoDB');
   } catch (err) {
     console.error('Error connecting to MongoDB:', err);
   }
 }
 main()
+
 
 
 
