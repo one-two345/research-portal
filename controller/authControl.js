@@ -790,21 +790,21 @@ else if (req.params.page === "submitProject") {
   // const upload = multer({ storage });
 
   try {
-    verifyToken(req, res, async () => {
-    //   const User = await req.user;
-    // console.log(User);
-    //   if (!User) {
-    //     return res.json({ message: 'User not found. Please register or log in.' });
-    //   }
-      // upload.fields([
-      //   { name: 'cvFile', maxCount: 1 },
-      //   { name: 'proposalFile', maxCount: 2 },
-      //   { name: 'letter', maxCount: 2 }
-      // ])(req, res, async (err) => {
-      //   if (err) {
-      //     console.log('Error occurred during file upload: ' + err);
-      //     return res.json({ message: 'Error occurred during file upload' });
-      //   }
+    // verifyToken(req, res, async () => {
+    // //   const User = await req.user;
+    // // console.log(User);
+    // //   if (!User) {
+    // //     return res.json({ message: 'User not found. Please register or log in.' });
+    // //   }
+    //   upload.fields([
+    //     { name: 'cvFile', maxCount: 1 },
+    //     { name: 'proposalFile', maxCount: 2 },
+    //     { name: 'letter', maxCount: 2 }
+    //   ])(req, res, async (err) => {
+    //     if (err) {
+    //       console.log('Error occurred during file upload: ' + err);
+    //       return res.json({ message: 'Error occurred during file upload' });
+    //     }
 
 
 
@@ -848,7 +848,7 @@ else if (req.params.page === "submitProject") {
           teamMembers1.push(team1.split(',')[i]);
         }
         console.log("TeamMember1: " + teamMembers1);
-        console.log("CV: " + req.files['cvFile'][0].path)
+        // console.log("CV: " + req.files['cvFile'][0].path)
         const nowDate = new Date(Date.now()).toISOString();
         // console.log(cvPath);
         // console.log(proposalPath);
@@ -865,7 +865,7 @@ else if (req.params.page === "submitProject") {
           res.json('titlepresent')
 
         }else{
-          const projects=   await   ProjectModel.save({
+          const projects=   await   ProjectModel.create({
             projectTitle:projectTitle,
             teamMembers:teamMembers1,
             projectCategory:projectCategory,
@@ -887,7 +887,7 @@ else if (req.params.page === "submitProject") {
         }
         
        
-      });
+    //   });
     // });
   } catch (error) { 
     return res.json({ message: 'Error occurred during project idea submission: ' + error });
