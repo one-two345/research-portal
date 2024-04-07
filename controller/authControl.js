@@ -775,7 +775,7 @@ const register = async (req, res) => {
 
 else if (req.params.page === "submitProject") {
   const __filename = fileURLToPath(import.meta.url);
-  console.log(req.files['cvFile'][0].path)
+
   // const __dirname = dirname(__filename);
   const __dirname = "public";
   const storage = multer.diskStorage({
@@ -791,11 +791,12 @@ else if (req.params.page === "submitProject") {
 
   try {
     verifyToken(req, res, async () => {
-      const User = await req.user;
-    console.log(User);
-      if (!User) {
-        return res.json({ message: 'User not found. Please register or log in.' });
-      }
+    //   const User = await req.user;
+    // console.log(User);
+    //   if (!User) {
+    //     return res.json({ message: 'User not found. Please register or log in.' });
+    //   }
+    console.log(req.files['cvFile'][0].path)
       upload.fields([
         { name: 'cvFile', maxCount: 1 },
         { name: 'proposalFile', maxCount: 2 },
