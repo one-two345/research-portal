@@ -775,7 +775,7 @@ const register = async (req, res) => {
 
 else if (req.params.page === "submitProject") {
   const __filename = fileURLToPath(import.meta.url);
-  console.log(req.files['cvFile'][0].path)
+
   // const __dirname = dirname(__filename);
   const __dirname = "public";
   const storage = multer.diskStorage({
@@ -791,11 +791,11 @@ else if (req.params.page === "submitProject") {
 
   try {
     verifyToken(req, res, async () => {
-      const User = await req.user;
-    console.log(User);
-      if (!User) {
-        return res.json({ message: 'User not found. Please register or log in.' });
-      }
+    //   const User = await req.user;
+    // console.log(User);
+    //   if (!User) {
+    //     return res.json({ message: 'User not found. Please register or log in.' });
+    //   }
       upload.fields([
         { name: 'cvFile', maxCount: 1 },
         { name: 'proposalFile', maxCount: 2 },
@@ -822,7 +822,7 @@ else if (req.params.page === "submitProject") {
         console.log("TeamMember: " + teamMembers);
 
         const cvPath = req.files['cvFile'][0].path.split('\\')[1] + '\\' + req.files['cvFile'][0].path.split('\\')[2];
-
+        console.log(req.files['cvFile'][0].path)
         const proposalPath = req.files['proposalFile'][0].path.split('\\')[1] + "\\" +req.files['proposalFile'][0].path.split('\\')[2];
         const letterPath = req.files['letter'][0].path.split('\\')[1] + "\\" +req.files['letter'][0].path.split('\\')[2];
 
@@ -835,6 +835,7 @@ else if (req.params.page === "submitProject") {
           teamMembers1.push(team1.split(',')[i]);
         }
         console.log("TeamMember1: " + teamMembers1);
+        console.log("CV: " + req.files['cvFile'][0].path)
         const nowDate = new Date(Date.now()).toISOString();
         // console.log(cvPath);
         // console.log(proposalPath);
