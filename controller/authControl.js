@@ -818,9 +818,12 @@ else if (req.params.page === "submitProject") {
         const description = req.body.description;
         const email1 = req.body.email;
         const institute = req.body.institute;
-        const cvPath1 = req.body.cvFile;
-        const proposalPath1 = req.body.proposalFile;        
-        const letterPath1 = req.body.letter;
+        const cvPath = "hi/adane"
+        //req.body.cvFile;
+        const proposalPath = "hi/adane"
+        //req.body.proposalFile;        
+        const letterPath = "hi/adane"
+        //req.body.letter;
 
        
         
@@ -828,19 +831,19 @@ else if (req.params.page === "submitProject") {
         console.log('Project Title:', projectTitle);
         console.log("TeamMember: " + teamMembers);
 
-        const serverUrl = 'https://research-portal-server-9.onrender.com'; // Replace this with your server URL
+        // const serverUrl = 'https://research-portal-server-9.onrender.com'; // Replace this with your server URL
 
-        const cvPaths = req.files['cvFile'][0].path;
-        const cleanFilePathC = cvPaths.replace(/\\/g, '/').split('public/').pop();
-        const cvPath = serverUrl + '/' + cleanFilePathC;
+        // const cvPaths = req.files['cvFile'][0].path;
+        // const cleanFilePathC = cvPaths.replace(/\\/g, '/').split('public/').pop();
+        // const cvPath = serverUrl + '/' + cleanFilePathC;
         
-        const proposalPaths = req.files['proposalFile'][0].path;
-        const cleanFilePathP = proposalPaths.replace(/\\/g, '/').split('public/').pop();
-        const proposalPath = serverUrl + '/' + cleanFilePathP;
+        // const proposalPaths = req.files['proposalFile'][0].path;
+        // const cleanFilePathP = proposalPaths.replace(/\\/g, '/').split('public/').pop();
+        // const proposalPath = serverUrl + '/' + cleanFilePathP;
 
-        const letterPaths = req.files['letter'][0].path;
-        const cleanFilePathL = letterPaths.replace(/\\/g, '/').split('public/').pop();
-        const letterPath = serverUrl + '/' + cleanFilePathL;
+        // const letterPaths = req.files['letter'][0].path;
+        // const cleanFilePathL = letterPaths.replace(/\\/g, '/').split('public/').pop();
+        // const letterPath = serverUrl + '/' + cleanFilePathL;
 
         let team1 = teamMembers.replace('[', '');
         team1 = team1.replace(']', '');
