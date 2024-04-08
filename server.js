@@ -14,6 +14,7 @@ import submmitProject from './controller/submmitProject.js';
 import announcementPost from './controller/announcementPost.js';
 
 //routes imports 
+import userFiles from './routes/userFiles.js'
 import news from './routes/news.js'
 import Collaboration from './routes/collaboration.js';
 import resources from './routes/resources.js'
@@ -81,6 +82,7 @@ app.get('/logout', (req, res) => {
   res.clearCookie('token').send('Logged out successfully.');
 });
  app.use('/auth/:page',register)
+ app.use('/user-files', userFiles)
 // app.post('/auth/register',register)
 // app.post('/auth/submitProject', submmitProject)
 app.use('/announcements/:page', announcementPost);
