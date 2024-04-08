@@ -10,6 +10,7 @@ import path from 'path';
 
 
 import register from './controller/authControl.js'
+import submmitProject from './controller/submmitProject.js';
 import announcementPost from './controller/announcementPost.js';
 
 //routes imports 
@@ -82,7 +83,9 @@ main()
 app.get('/logout', (req, res) => {
   res.clearCookie('token').send('Logged out successfully.');
 });
-app.use('/auth/:page',register)
+// app.use('/auth/:page',register)
+app.use('/auth/register',register)
+app.use('/auth/submitProject', submmitProject)
 app.use('/announcements/:page', announcementPost);
 app.use('/authl',login)
 app.use('/userd', dashboardRouteUser)
