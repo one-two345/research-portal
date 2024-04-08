@@ -19,7 +19,7 @@ const submmitProject = async ( req, res)  => {
         
        
         console.log('Project Title:', projectTitle);
-        console.log("TeamMember: " + teamMembers);
+        console.log("TeamMembers: " + teamMembers);
 
         // const serverUrl = 'https://research-portal-server-9.onrender.com'; // Replace this with your server URL
 
