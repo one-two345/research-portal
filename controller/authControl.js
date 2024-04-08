@@ -818,12 +818,12 @@ else if (req.params.page === "submitProject") {
         const description = req.body.description;
         const email1 = req.body.email;
         const institute = req.body.institute;
-        const cvPath = "hi/adane"
-        //req.body.cvFile;
-        const proposalPath = "hi/adane"
-        //req.body.proposalFile;        
-        const letterPath = "hi/adane"
-        //req.body.letter;
+        const cvPath = req.body.cvFile;
+        console.log(cvPath)
+        const proposalPath = req.body.proposalFile;  
+        console.log(proposalPath)      
+        const letterPath = req.body.letter;
+        console.log(letterPath)
 
        
         
@@ -854,7 +854,7 @@ else if (req.params.page === "submitProject") {
           teamMembers1.push(team1.split(',')[i]);
         }
         console.log("TeamMember1: " + teamMembers1);
-         console.log("CV: " + req.files['cvFile'][0].path)
+         //console.log("CV: " + req.files['cvFile'][0].path)
         const nowDate = new Date(Date.now()).toISOString();
         // console.log(cvPath);
         // console.log(proposalPath);
