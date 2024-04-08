@@ -79,9 +79,9 @@ main()
 app.get('/logout', (req, res) => {
   res.clearCookie('token').send('Logged out successfully.');
 });
-// app.use('/auth/:page',register)
-app.post('/auth/register',register)
-app.post('/auth/submitProject', submmitProject)
+ app.use('/auth/:page',register)
+// app.post('/auth/register',register)
+// app.post('/auth/submitProject', submmitProject)
 app.use('/announcements/:page', announcementPost);
 app.use('/authl',login)
 app.use('/userd', dashboardRouteUser)
