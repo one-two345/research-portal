@@ -789,7 +789,7 @@ else if (req.params.page === "submitProject") {
 
   // const upload = multer({ storage });
 
-  // try {
+  
     // verifyToken(req, res, async () => {
     // //   const User = await req.user;
     // // console.log(User);
@@ -823,7 +823,7 @@ else if (req.params.page === "submitProject") {
         const letterPath = req.body.letter;
 
        
-    try{    
+        
        
         console.log('Project Title:', projectTitle);
         console.log("TeamMember: " + teamMembers);
@@ -889,21 +889,15 @@ else if (req.params.page === "submitProject") {
         
             res.json('Project is stored in the database: ' + project);
           } catch (error) {
-            res.json('Error during creating project: ' + error);
+            res.status(500).json('Error during creating project: ' + error);
           }
                
         
       }
     //   });
     // });
-  } catch (error) { 
-    return res.json({ message: 'Error occurred during project idea submission: ' + error });
-  }
+
 }
-
-
-
-
  
   
 

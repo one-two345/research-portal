@@ -50,16 +50,16 @@ const projectIdea = new mongoose.Schema({
     required: true
   },
   proposalPath2:{
-    type: String
-    //required: true
+    type: String,
+    required: true
   },
   presentationPath:{
-    type: String
-   // required: true
+    type: String,
+    required: true
   },
   proposalPath3:{
-    type: String
-    //required: true
+    type: String,
+    required: true
   }
 });
 
