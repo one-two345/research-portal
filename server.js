@@ -55,7 +55,8 @@ app.use(cookieParser())
 //     credentials:true,            //access-control-allow-credentials:true
 //     optionSuccessStatus:200
 // }
-app.use(cors());
+app.use(cors({ origin:'https://mint2024.netlify.app', 
+    credentials:true,  } ));
 app.use(express.static(path.join('./', 'public')));
 dotenv.config();
 
