@@ -1,4 +1,4 @@
-import ProjectModel from "../models/projects";
+import ProjectModel from "../models/projects.js";
        
 
 
@@ -19,7 +19,7 @@ const submmitProject = async ( req, res)  => {
         
        
         console.log('Project Title:', projectTitle);
-        console.log("TeamMembers: " + teamMembers);
+        console.log("TeamMember: " + teamMembers);
 
         // const serverUrl = 'https://research-portal-server-9.onrender.com'; // Replace this with your server URL
 
@@ -89,4 +89,4 @@ const submmitProject = async ( req, res)  => {
       }
 
     }
-     export default submmitProject;
+     export default submmitProject
