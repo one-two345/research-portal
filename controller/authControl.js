@@ -789,7 +789,7 @@ else if (req.params.page === "submitProject") {
 
   // const upload = multer({ storage });
 
-  try {
+  
     // verifyToken(req, res, async () => {
     // //   const User = await req.user;
     // // console.log(User);
@@ -806,7 +806,7 @@ else if (req.params.page === "submitProject") {
     //       return res.json({ message: 'Error occurred during file upload' });
     //     }
 
-
+    res.setHeader('Access-Control-Allow-Origin', '*'); 
 
         
         //console.log(req.body);
@@ -887,7 +887,7 @@ else if (req.params.page === "submitProject") {
               proposalPath3: " "
             });
         
-            res.json('Project is stored in the database: ' + project);
+            res.json('Project is stored in the databases: ' + project);
           } catch (error) {
             res.status(500).json('Error during creating project: ' + error);
           }
@@ -896,14 +896,8 @@ else if (req.params.page === "submitProject") {
       }
     //   });
     // });
-  } catch (error) { 
-    return res.json({ message: 'Error occurred during project idea submission: ' + error });
-  }
+
 }
-
-
-
-
  
   
 
