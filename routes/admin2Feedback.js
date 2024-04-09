@@ -24,6 +24,12 @@ router.post('/setFeedback', async function(req, res){
         })
         .then(result => console.log(result))
         .catch(err=>console.log(err))
+
+        const id2 = new mongoose.Types.ObjectId(id);
+        await ProjectModel.findOneAndUpdate({_id:id2}, {currentReviewer: "MinT Research Sector Members"})
+        .then(result=>{ 
+            console.log(result)})
+        .catch(err=> res.json(err))
     }
 });
 
