@@ -32,9 +32,9 @@ const adminUserStatus=async (req, res)=>{
     {
         const id1 = new mongoose.Types.ObjectId(req.params.id.split('-')[0]);
         const newStatus = parseInt(req.params.id.split('-')[1]);
+        await ProjectModel.updateMany( {},{ $set: { currentReviewer : "MinT Research Sector Members"} }, { multi: true });
         try{
             console.log(id1);
-            await ProjectModel.updateMany( {},{ $set: { currentReviewer : "MinT Research Sector Members"} }, { multi: true });
             await ProjectModel.findOneAndUpdate({_id:id1}, {status: newStatus})
             .then(result=>{ 
                console.log(result)})
