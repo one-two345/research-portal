@@ -797,8 +797,7 @@ const register = async (req, res) => {
         uniqueID,
         sex,
         registeredDate: nowDate,
-        role: adminType,
-        currentReviewer: "Technical Committee Members"
+        role: adminType
       });
      
       const token = jwt.sign({ user: newUser }, SECRET_KEY, { expiresIn: '1h' });
@@ -925,7 +924,8 @@ else if (req.params.page === "submitProject") {
               grantedDate: nowDate,
               proposalPath2: " ",
               presentationPath: " ",
-              proposalPath3: " "
+              proposalPath3: " ",
+              currentReviewer: "Technical Committee Members"
             });
         
             res.json('Project is stored in the database: ' + project);
