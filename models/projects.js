@@ -63,6 +63,7 @@ const projectIdea = new mongoose.Schema({
   },
   currentReviewer:{
     type: String,
+    default: "MinT Research Sector Members",
     required: true
   }
 });
