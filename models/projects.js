@@ -65,7 +65,7 @@ const projectIdea = new mongoose.Schema({
     type: String,
     default: "MinT Research Sector Members",
     required: true
-  }
+  },
 });
 
  const ProjectModel = mongoose.model("projectfiles", projectIdea)
