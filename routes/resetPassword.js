@@ -14,8 +14,8 @@ passwordRoute.post('/forgot',(req,res)=>{
      res.json('user not found')
     
     }
-    console.log(user._id.toString())
-    const idd=user._id.toString();
+    console.log(user._id)
+    const idd=user._id
     const token=jwt.sign({id:idd},'adaneeshete',{expiresIn:'1d'})
     console.log(token)
     const transporter = nodemailer.createTransport({
