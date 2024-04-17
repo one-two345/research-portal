@@ -87,6 +87,7 @@ app.get('/logout', (req, res) => {
 // app.post('/auth/submitProject', submmitProject)
 app.use('/announcements/:page', announcementPost);
 app.use('/authl',login)
+app.use('/updatepassword',passwordRoute)
 app.use('/userd', dashboardRouteUser)
 app.use('/admind',dashboardRoute)
 app.use('/admind2',dashboardRoute2)
@@ -119,7 +120,7 @@ app.use('/admin/appointment/:id', adminAppointment);
 app.use('/admin2Feedback', admin2Feedback);
 app.use('/projectFiles', projectFilesUpload);
 app.use('/admin2Reports', admin2Reports);
-app.use('/updatepassword',passwordRoute)
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
