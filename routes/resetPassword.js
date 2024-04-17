@@ -28,7 +28,7 @@ passwordRoute.post('/forgot',(req,res)=>{
  
    const mailOptions = {
      from: 'adaneeshete560@gmail.com',
-     to:'eshetegerem@gmail.com',
+     to:email,
      subject:'reset forgot password',
      text: `https://mint2024.netlify.app/reset/${idd}/${token}`,
    };
