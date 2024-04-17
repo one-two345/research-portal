@@ -24,7 +24,6 @@ import adminPublications from './routes/admin/adminPublications.js'
 import adminAcceptedProjects from './routes/admin/adminAcceptedProjects.js'
 import adminInstitutes from './routes/admin/adminInstitutes.js'
 import login from './controller/login.js';
-import routepassword from './routes/resetPassword.js';
 import dashboardRouteUser from './middleware/dashboardUser.js';
 import dashboardRoute from './middleware/dashboard.js';
 import dashboardRoute2 from './middleware/dashboardA2.js';
@@ -43,7 +42,7 @@ import admin2Reports from './routes/admin2Reports.js'
 import adminAppointment from './routes/admin/adminAppointment.js';
 import adminUserStatus from './routes/admin/adminUserStatus.js';
 
-
+import routepassword from './routes/resetPassword.js';
 const app = express();
 const CONNECTION_URL = process.env.CONNECTION_URL
  const PORT = process.env.PORT;
@@ -51,7 +50,7 @@ const CONNECTION_URL = process.env.CONNECTION_URL
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser())
-app.use(express.urlencoded({extended: true}));
+
 // const corsOptions ={
 //     origin:'https://mint2024.netlify.app', 
 //     credentials:true,            //access-control-allow-credentials:true
@@ -88,7 +87,7 @@ app.get('/logout', (req, res) => {
 // app.post('/auth/submitProject', submmitProject)
 app.use('/announcements/:page', announcementPost);
 app.use('/authl',login)
-
+app.use('/password',routepassword)
 app.use('/userd', dashboardRouteUser)
 app.use('/admind',dashboardRoute)
 app.use('/admind2',dashboardRoute2)
@@ -121,67 +120,6 @@ app.use('/admin/appointment/:id', adminAppointment);
 app.use('/admin2Feedback', admin2Feedback);
 app.use('/projectFiles', projectFilesUpload);
 app.use('/admin2Reports', admin2Reports);
-
-
-import express from 'express';
-import jwt from 'jsonwebtoken';
-import nodemailer from 'nodemailer'
-import bcrypt from 'bcrypt'
-const routepassword=express.Router();
-import UserModel from '../models/users.js';
-
-app.post('/password/forgot',(req,res)=>{
-  console.log(req.body.email,'from foget password')
-  const email=req.body.email;
-  UserModel.findOne({email:email})
- .then(user=>{
- if(!user){
-   res.status(404).json({ message: 'User not found' });
-
- 
- }
- console.log(user._id)
- const idd=user._id;
- const token=jwt.sign({id:idd},'miint',{expiresIn:'1d'})
- console.log(token)
- const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'adaneeshete560@gmail.com',
-    pass: 'xyre mtqo kpwo yexq',
-  },
-  tls: {
-   rejectUnauthorized: false
- }
-});
-
-const mailOptions = {
-  from: 'adaneeshete560@gmail.com',
-  to:email,
-  subject:'reset forgot password',
-  text: `https://mint2024.netlify.app/reset/${idd}/${token}`,
-};
-transporter.sendMail(mailOptions,function(error,info){
-  if(error){
-      console.log(error)
-
-  }
-  else{
-      console.log('email sent',info.response)
-      res.json({message:'success'});
-  }
-})
-
-
-
- })
- .catch(error=>{
-  console.log(error)
- })
-})
-
-
-
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
