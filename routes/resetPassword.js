@@ -24,6 +24,9 @@ routepassword.post('/forgot',(req,res)=>{
        user: 'adaneeshete560@gmail.com',
        pass: 'xyre mtqo kpwo yexq',
      },
+     tls: {
+      rejectUnauthorized: false
+    }
    });
  
    const mailOptions = {

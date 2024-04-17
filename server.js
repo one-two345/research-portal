@@ -51,7 +51,7 @@ const CONNECTION_URL = process.env.CONNECTION_URL
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser())
-
+app.use(express.urlencoded({extended: true}));
 // const corsOptions ={
 //     origin:'https://mint2024.netlify.app', 
 //     credentials:true,            //access-control-allow-credentials:true
