@@ -22,7 +22,7 @@ passwordRoute.post('/forgot',(req,res)=>{
      service: 'gmail',
      auth: {
        user: 'adaneeshete560@gmail.com',
-       pass: 'aijd jwud awua mmvm',
+       pass: 'xyre mtqo kpwo yexq',
      },
    });
  
