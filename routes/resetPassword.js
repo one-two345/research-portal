@@ -11,7 +11,8 @@ routepassword.post('/forgot',(req,res)=>{
      UserModel.findOne({email:email})
     .then(user=>{
     if(!user){
-     res.json('user not found')
+      res.status(404).json({ message: 'User not found' });
+
     
     }
     console.log(user._id)
