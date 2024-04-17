@@ -2,10 +2,10 @@ import express from 'express';
 import jwt from 'jsonwebtoken';
 import nodemailer from 'nodemailer'
 import bcrypt from 'bcrypt'
-
+const routepassword=express.Router();
 import UserModel from '../models/users.js';
-const passwordRoute=express.Router()
-passwordRoute.post('/forgot',(req,res)=>{
+
+routepassword.post('/forgot',(req,res)=>{
      console.log(req.body.email,'from foget password')
      const email=req.body.email;
      UserModel.findOne({email:email})
@@ -15,7 +15,7 @@ passwordRoute.post('/forgot',(req,res)=>{
     
     }
     console.log(user._id)
-    const idd=user._id.toString();
+    const idd=user._id;
     const token=jwt.sign({id:idd},'miint',{expiresIn:'1d'})
     console.log(token)
     const transporter = nodemailer.createTransport({
@@ -51,7 +51,7 @@ passwordRoute.post('/forgot',(req,res)=>{
     })
  })
 
- passwordRoute.post('/reset', async(req, res) => {
+ routepassword.post('/reset', async(req, res) => {
     const { id, password } = req.body;
     
     const hash = await bcrypt.hash(password, 12);
@@ -71,4 +71,4 @@ passwordRoute.post('/forgot',(req,res)=>{
   });
   
 
-export default passwordRoute
+export default routepassword;

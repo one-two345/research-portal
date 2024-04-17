@@ -24,6 +24,7 @@ import adminPublications from './routes/admin/adminPublications.js'
 import adminAcceptedProjects from './routes/admin/adminAcceptedProjects.js'
 import adminInstitutes from './routes/admin/adminInstitutes.js'
 import login from './controller/login.js';
+import routepassword from './routes/resetPassword.js';
 import dashboardRouteUser from './middleware/dashboardUser.js';
 import dashboardRoute from './middleware/dashboard.js';
 import dashboardRoute2 from './middleware/dashboardA2.js';
@@ -42,7 +43,7 @@ import admin2Reports from './routes/admin2Reports.js'
 import adminAppointment from './routes/admin/adminAppointment.js';
 import adminUserStatus from './routes/admin/adminUserStatus.js';
 
-import passwordRoute from './routes/resetPassword.js';
+
 const app = express();
 const CONNECTION_URL = process.env.CONNECTION_URL
  const PORT = process.env.PORT;
@@ -87,7 +88,7 @@ app.get('/logout', (req, res) => {
 // app.post('/auth/submitProject', submmitProject)
 app.use('/announcements/:page', announcementPost);
 app.use('/authl',login)
-app.use('/updatepassword',passwordRoute)
+app.use('/password',routepassword)
 app.use('/userd', dashboardRouteUser)
 app.use('/admind',dashboardRoute)
 app.use('/admind2',dashboardRoute2)
