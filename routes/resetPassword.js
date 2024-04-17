@@ -15,8 +15,8 @@ passwordRoute.post('/forgot',(req,res)=>{
     
     }
     console.log(user._id)
-    const idd=user._id
-    const token=jwt.sign({id:idd},'adaneeshete',{expiresIn:'1d'})
+    const idd=user._id.toString();
+    const token=jwt.sign({id:idd},'miint',{expiresIn:'1d'})
     console.log(token)
     const transporter = nodemailer.createTransport({
      service: 'gmail',
