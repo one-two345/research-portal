@@ -42,7 +42,7 @@ import admin2Reports from './routes/admin2Reports.js'
 import adminAppointment from './routes/admin/adminAppointment.js';
 import adminUserStatus from './routes/admin/adminUserStatus.js';
 
-
+import passwordRoute from './routes/resetPassword.js';
 const app = express();
 const CONNECTION_URL = process.env.CONNECTION_URL
  const PORT = process.env.PORT;
@@ -119,7 +119,7 @@ app.use('/admin/appointment/:id', adminAppointment);
 app.use('/admin2Feedback', admin2Feedback);
 app.use('/projectFiles', projectFilesUpload);
 app.use('/admin2Reports', admin2Reports);
-
+app.use('/updatepassword',passwordRoute)
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
