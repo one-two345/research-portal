@@ -749,6 +749,8 @@ const register = async (req, res) => {
       const nowDate = new Date(Date.now()).toISOString();
       // await UserModel.updateMany( {},{ $set: { sex : 'Male'} }, { multi: true });
       // await UserModel.updateMany( {},{ $set: { registeredDate : nowDate} }, { multi: true });
+      //////////////////////////
+      ///////////////////////
       const newUser = await UserModel.create({
         fName,
         LName,
@@ -760,6 +762,24 @@ const register = async (req, res) => {
         uniqueID,
         sex,
         registeredDate: nowDate
+      });
+      const project = await ProjectModel.create({
+        projectTitle: " ",
+        teamMembers: [" "],
+        projectCategory: " ",
+        description: " ",
+        cvPath: " ",
+        proposalPath: " ",
+        email,
+        status: 1,
+        hostInstitution: " ",
+        letterPath: " ",
+        submittedDate: nowDate,
+        grantedDate: nowDate,
+        proposalPath2: " ",
+        presentationPath: " ",
+        proposalPath3: " ",
+        currentReviewer: "Technical Committee Members"
       });
      
       const token = jwt.sign({ user: newUser }, SECRET_KEY, { expiresIn: '1h' });
