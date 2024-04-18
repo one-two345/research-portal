@@ -787,6 +787,13 @@ const register = async (req, res) => {
       
       res.json('Userregistered' );
       //res.status(201).json({result: newUser, token} );
+      jwt.verify(token, 'miint', (err, user) => {
+        if (err) {
+          return res.sendStatus(403); // Forbidden if token is invalid
+        }
+        req.user = user; // Attach user information to request object
+        next(); // Move to the next middleware
+      });
     } catch (error) {
       res.status(500).json({ error: 'Error during registration: ' + error });
     }
@@ -929,14 +936,18 @@ else if (req.params.page === "submitProject") {
 
         }else {
           try {
-            const project = await ProjectModel.create({
+           
+            const user = req.user;
+            const project = await ProjectModel.findOneAndUpdate(
+              { email: user.email }, // Find project by user's ID
+              {
               projectTitle: projectTitle,
               teamMembers: teamMembers1,
               projectCategory: projectCategory,
               description: description,
               cvPath: cvPath,
               proposalPath: proposalPath,
-              email: email1,
+              email: user.email,
               status: 1,
               hostInstitution: institute,
               letterPath: letterPath,
@@ -946,7 +957,9 @@ else if (req.params.page === "submitProject") {
               presentationPath: " ",
               proposalPath3: " ",
               currentReviewer: "Technical Committee Members"
-            });
+              },
+              { new: true, upsert: true } // Create the project if it doesn't exist
+            );
         
             res.json('Project is stored in the database: ' + project);
           } catch (error) {
