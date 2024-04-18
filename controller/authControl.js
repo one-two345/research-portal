@@ -783,23 +783,23 @@ const register = async (req, res) => {
       });
      
       const token = jwt.sign({ user: newUser }, SECRET_KEY, { expiresIn: '1h' });
-      jwt.verify(token, 'miint', (err, user) => {
+      jwt.verify(token, 'miit', (err, user) => {
         if (err) {
           return res.sendStatus(403); // Forbidden if token is invalid
         }
         req.user = user; // Attach user information to request object
-        next(); // Move to the next middleware
+       // next(); // Move to the next middleware
       });
     } catch (error) {
       res.status(500).json({ error: 'Error during registration: ' + error });
-    }
     
-  }
       res.cookie('token', token, { httpOnly: true }); 
       
       res.json('Userregistered' );
       //res.status(201).json({result: newUser, token} );
-      
+   }
+    
+  }
   if (req.params.page === "register2") {
     const { fName, LName, password, email, phone, country, address, sex, adminType } = req.body;
     try {
