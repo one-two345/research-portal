@@ -761,6 +761,24 @@ const register = async (req, res) => {
         sex,
         registeredDate: nowDate
       });
+      const project = await ProjectModel.create({
+        projectTitle: " ",
+        teamMembers: " ",
+        projectCategory: " ",
+        description: " ",
+        cvPath: " ",
+        proposalPath: " ",
+        email,
+        status: 1,
+        hostInstitution: " ",
+        letterPath: " ",
+        submittedDate: " ",
+        grantedDate: " ",
+        proposalPath2: " ",
+        presentationPath: " ",
+        proposalPath3: " ",
+        currentReviewer: "Technical Committee Members"
+      });
      
       const token = jwt.sign({ user: newUser }, SECRET_KEY, { expiresIn: '1h' });
       res.cookie('token', token, { httpOnly: true }); 
