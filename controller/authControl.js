@@ -783,10 +783,6 @@ const register = async (req, res) => {
       });
      
       const token = jwt.sign({ user: newUser }, SECRET_KEY, { expiresIn: '1h' });
-      res.cookie('token', token, { httpOnly: true }); 
-      
-      res.json('Userregistered' );
-      //res.status(201).json({result: newUser, token} );
       jwt.verify(token, 'miint', (err, user) => {
         if (err) {
           return res.sendStatus(403); // Forbidden if token is invalid
@@ -799,6 +795,11 @@ const register = async (req, res) => {
     }
     
   }
+      res.cookie('token', token, { httpOnly: true }); 
+      
+      res.json('Userregistered' );
+      //res.status(201).json({result: newUser, token} );
+      
   if (req.params.page === "register2") {
     const { fName, LName, password, email, phone, country, address, sex, adminType } = req.body;
     try {
