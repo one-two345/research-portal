@@ -749,6 +749,8 @@ const register = async (req, res) => {
       const nowDate = new Date(Date.now()).toISOString();
       // await UserModel.updateMany( {},{ $set: { sex : 'Male'} }, { multi: true });
       // await UserModel.updateMany( {},{ $set: { registeredDate : nowDate} }, { multi: true });
+      //////////////////////////
+      ///////////////////////
       const newUser = await UserModel.create({
         fName,
         LName,

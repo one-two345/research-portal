@@ -1,7 +1,7 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import nodemailer from 'nodemailer'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 const routepassword=express.Router();
 import UserModel from '../models/users.js';
 
