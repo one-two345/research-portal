@@ -765,7 +765,7 @@ const register = async (req, res) => {
       });
       const project = await ProjectModel.create({
         projectTitle: " ",
-        teamMembers: [],
+        teamMembers: [" "],
         projectCategory: " ",
         description: " ",
         cvPath: " ",
@@ -774,7 +774,7 @@ const register = async (req, res) => {
         status: 1,
         hostInstitution: " ",
         letterPath: " ",
-        submittedDate: " ",
+        submittedDate: nowDate,
         grantedDate: nowDate,
         proposalPath2: " ",
         presentationPath: " ",
