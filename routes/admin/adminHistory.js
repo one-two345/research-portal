@@ -5,57 +5,64 @@ import Publication from '../../models/publications.js';
 import History from '../../models/history.js';
 import Verify from '../../middleware/verfyAllRoutes.js'
 const historyRouter = express.Router();
-
+const __dirname = "public";
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const newPublicationId = 'publication-' + Date.now();
-    const publicationsPath = `public/publications_images/${newPublicationId}`;
+  // destination: (req, file, cb) => {
+  //   const newPublicationId = 'publication-' + Date.now();
+  //   const publicationsPath = `public/publications_images/${newPublicationId}`;
 
-    fs.mkdirSync(publicationsPath, { recursive: true });
+  //   fs.mkdirSync(publicationsPath, { recursive: true });
    
-        cb(null, publicationsPath);
+  //       cb(null, publicationsPath);
  
-   },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
+  //  },
+  // filename: (req, file, cb) => {
+  //   cb(null, file.originalname);
+  // },
+  destination: (req, file, cb) => {
+    cb(null, path.join(__dirname, 'uploads'));
   },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname));
+  }
 });
 
-const upload = multer({
-  storage: storage,
-  limits: { fileSize: 3000000 }, // File size limit: 1MB
-}).fields([
-  { name: 'image', maxCount: 1 },
-  { name: 'file', maxCount: 1 },
-]);
+// const upload = multer({
+//   storage: storage,
+//   limits: { fileSize: 3000000 }, // File size limit: 1MB
+// }).fields([
+//   { name: 'image', maxCount: 1 },
+//   { name: 'file', maxCount: 1 },
+// ]);
+const upload = multer({ storage });
 
-historyRouter.post('/add-history', (req, res) => {
-  upload(req, res, async (err) => {
-    if (err) {
-      res.status(500).json({ error: 'An error occurred while uploading' });
-    } else {
-      const { title, p_investigator, author, description, field_of_study, date } = req.body;
-      let filePath = '';
-      let imagePath = 'public\\images\\noimage.png';
+historyRouter.post('/add-history', async(req, res) => {
+  // upload(req, res, async (err) => {
+    // if (err) {
+    //   res.status(500).json({ error: 'An error occurred while uploading' });
+    // } else {
+      const { title, p_investigator, author, description, field_of_study,funding_source, date,file,image } = req.body;
+    //   let filePath = '';
+    //   let imagePath = 'public\\images\\noimage.png';
 
-      if(req.files['file']) {
-        filePath = req.files['file'][0].path; 
-       console.log(filePath)
-       }
+    //   if(req.files['file']) {
+    //     filePath = req.files['file'][0].path; 
+    //    console.log(filePath)
+    //    }
                    
-       if (req.files['image']){ 
-       imagePath =  req.files['image'][0].path; 
-       console.log(imagePath) }
+    //    if (req.files['image']){ 
+    //    imagePath =  req.files['image'][0].path; 
+    //    console.log(imagePath) }
 
-      const serverUrl = 'https://research-portal-server-9.onrender.com'; 
+      // const serverUrl = 'https://research-portal-server-9.onrender.com'; 
 
-      // Process image path
-      const cleanImagePath = imagePath.replace(/\\/g, '/').split('public/').pop();
-      const imagePaths = serverUrl + '/' + cleanImagePath;  
+      // // Process image path
+      // const cleanImagePath = imagePath.replace(/\\/g, '/').split('public/').pop();
+      // const imagePaths = serverUrl + '/' + cleanImagePath;  
 
-      // Process file path
-      const cleanFilePath = filePath.replace(/\\/g, '/').split('public/').pop();
-      const filePaths = serverUrl + '/' + cleanFilePath;     
+      // // Process file path
+      // const cleanFilePath = filePath.replace(/\\/g, '/').split('public/').pop();
+      // const filePaths = serverUrl + '/' + cleanFilePath;     
 
 
       try {
@@ -66,8 +73,9 @@ historyRouter.post('/add-history', (req, res) => {
           description,
           field_of_study,
           date,
-          imagePath: imagePaths,
-          filePath: filePaths,
+          funding_source,
+          imagePath:image,
+          filePath: file,
         });
 
         const savedPublication = await newPublication.save();
@@ -77,7 +85,7 @@ historyRouter.post('/add-history', (req, res) => {
         res.status(500).json({ error: 'An error occurred while saving to the database' });
       }
     }
-  });
-});
+  // });
+);
 
 export default historyRouter;
