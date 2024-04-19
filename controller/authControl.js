@@ -763,24 +763,24 @@ const register = async (req, res) => {
         sex,
         registeredDate: nowDate
       });
-      const project = await ProjectModel.create({
-        projectTitle: " ",
-        teamMembers: [" "],
-        projectCategory: " ",
-        description: " ",
-        cvPath: " ",
-        proposalPath: " ",
-        email,
-        status: 1,
-        hostInstitution: " ",
-        letterPath: " ",
-        submittedDate: nowDate,
-        grantedDate: nowDate,
-        proposalPath2: " ",
-        presentationPath: " ",
-        proposalPath3: " ",
-        currentReviewer: "Technical Committee Members"
-      });
+      // const project = await ProjectModel.create({
+      //   projectTitle: " ",
+      //   teamMembers: [" "],
+      //   projectCategory: " ",
+      //   description: " ",
+      //   cvPath: " ",
+      //   proposalPath: " ",
+      //   email,
+      //   status: 1,
+      //   hostInstitution: " ",
+      //   letterPath: " ",
+      //   submittedDate: nowDate,
+      //   grantedDate: nowDate,
+      //   proposalPath2: " ",
+      //   presentationPath: " ",
+      //   proposalPath3: " ",
+      //   currentReviewer: "Technical Committee Members"
+      // });
      
       const token = jwt.sign({ user: newUser }, SECRET_KEY, { expiresIn: '1h' });
       res.cookie('token', token, { httpOnly: true }); 
@@ -938,8 +938,8 @@ else if (req.params.page === "submitProject") {
           try {
            
             const user = req.user;
-            const project = await ProjectModel.findOneAndUpdate(
-              { email: user.email }, // Find project by user's ID
+            const project = await ProjectModel.create(
+             // { email: user.email }, // Find project by user's ID
               {
               projectTitle: projectTitle,
               teamMembers: teamMembers1,
@@ -958,7 +958,7 @@ else if (req.params.page === "submitProject") {
               proposalPath3: " ",
               currentReviewer: "Technical Committee Members"
               },
-              { new: true, upsert: true } // Create the project if it doesn't exist
+              // { new: true, upsert: true } // Create the project if it doesn't exist
             );
         
             res.json('Project is stored in the database: ' + project);
