@@ -947,7 +947,7 @@ else if (req.params.page === "submitProject") {
               description: description,
               cvPath: cvPath,
               proposalPath: proposalPath,
-              email: user.email,
+              email: email1,
               status: 1,
               hostInstitution: institute,
               letterPath: letterPath,
