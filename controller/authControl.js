@@ -800,7 +800,7 @@ const register = async (req, res) => {
     
   }
   if (req.params.page === "register2") {
-    const { fName, LName, password, email, phone, country, address, sex, adminType } = req.body;
+    const { fName, LName, password, email, phone, country, address, sex, adminType, fieldType } = req.body;
     try {
       user = await UserModel.find({ email: email }); // Assign user
 
@@ -813,6 +813,23 @@ const register = async (req, res) => {
       // await UserModel.updateMany( {},{ $set: { sex : 'Male'} }, { multi: true });
       // await UserModel.updateMany( {},{ $set: { registeredDate : nowDate} }, { multi: true });
       //await ProjectModel.updateMany( {},{ $set: { currentReviewer : "MinT Research Sector Members"} }, { multi: true });
+      if(adminType === "admin2"){
+        const newUser = await UserModel.create({
+          fName,
+          LName,
+          password: hash,
+          email,
+          phone,
+          country,
+          address,
+          uniqueID,
+          sex,
+          registeredDate: nowDate,
+          role: adminType,
+          field: fieldType
+        });
+      }
+      else{
       const newUser = await UserModel.create({
         fName,
         LName,
@@ -826,7 +843,7 @@ const register = async (req, res) => {
         registeredDate: nowDate,
         role: adminType
       });
-     
+    }
       const token = jwt.sign({ user: newUser }, SECRET_KEY, { expiresIn: '1h' });
       res.cookie('token', token, { httpOnly: true }); 
       
