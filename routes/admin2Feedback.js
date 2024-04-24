@@ -41,8 +41,8 @@ router.get('/getFeedback', async function(req, res){
     .then((result) => {res.json(result); console.log(result)})
     .catch(err=>console.log(err))
 });
-router.get('/getField/:email', async function(req, res){
-    const email = req.params.email;
+router.post('/getField', async function(req, res){
+    const email = req.body.email;
     const user = await UserModel.find({email:email});
     res.json({field:user[0].field});
 });
